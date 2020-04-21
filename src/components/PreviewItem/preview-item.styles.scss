@@ -1,0 +1,48 @@
+.preview-item{
+    height: 90%;
+    width: 80%;
+    margin: 0 20px;
+    position: relative;
+    z-index: 1000;
+    &:first-child{
+        margin-left: 0;
+    }
+    &-image{
+        height: 95%;
+        background-size: cover;
+        background-position: center;
+        cursor: pointer;
+        backface-visibility: hidden;
+        border: none;
+        position: relative;
+    }
+    
+}
+
+
+.footer{
+    display: flex;
+    justify-content: space-between;
+}
+
+.card-btn{
+    z-index: 1000;
+    margin-bottom: 20%;
+}
+
+
+.shade{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
+    position: absolute;
+    z-index: 100;
+    transition: transform 0.5s ease-out;
+
+    &:hover{
+        background-color: rgba(207, 207, 207, 0.418);
+    }    
+}

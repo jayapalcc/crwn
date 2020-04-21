@@ -1,0 +1,44 @@
+@mixin shrink {
+    top: 40px;
+    font-size: 14px;
+    color: rgb(90, 90, 90);
+}
+
+.form-bg{
+    position: relative;
+
+    :first-child{
+        margin-top: 50px;
+    } 
+}
+
+.form-input{
+    border: none;
+    border-bottom: 1px solid rgb(71, 71, 71);
+    padding: 10px;
+    outline: none;
+    margin: 10px 0;
+    font-size: 20px;
+    width: 100%;
+    background-color: transparent;
+    &:focus ~.text-label{
+        top: 40px;
+        font-size: 14px;
+        color: rgb(90, 90, 90);
+    }
+}
+
+.text-label{
+    position: absolute;
+    z-index: -1;
+    left: 10px;
+    top: 65px;
+    font-size: 18px;
+    color: rgb(160, 160, 160);
+    font-weight: 200;
+    
+}
+
+.shrink-item{
+    @include shrink()
+}

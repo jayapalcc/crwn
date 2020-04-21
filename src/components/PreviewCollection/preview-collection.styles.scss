@@ -1,0 +1,20 @@
+.preview-collection{
+   //background-color: red;
+    height: 70vh;
+    margin: 10px;
+    //width: 100vw;
+    margin: 20px;
+}
+
+.preview-heading{
+    cursor: pointer;
+}
+
+.collection-item{
+    //background-color: green;
+    display: flex;
+    height: 90%;
+    width: 100%;
+    justify-content: space-between;
+
+}

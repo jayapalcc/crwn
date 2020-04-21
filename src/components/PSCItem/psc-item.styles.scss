@@ -1,0 +1,44 @@
+.psc-item{
+    height: 45vh;
+    flex: 0 0 18%;
+    //background-color: rgb(31, 31, 148);
+    margin: 25px 10px;
+    //border: 1px solid gray;
+
+    &-body{
+        width: 100%;
+        //background-color: maroon;
+        height: 90%;
+        background-position: center;
+        background-size: cover;
+
+            &-shade{
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                transition: all 0.5s ease-out;
+                display: flex;
+                flex-direction: column-reverse;
+                align-items: center;
+                
+
+                &:hover{
+                    background-color: rgba(128, 128, 128, 0.418);
+                }
+            }
+        
+    }
+}
+
+.psc-item-footer{
+    margin-top: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 24px;
+
+    &-name{
+        font-weight: 600;
+    }
+}

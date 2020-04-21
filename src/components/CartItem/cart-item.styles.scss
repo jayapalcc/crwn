@@ -1,0 +1,19 @@
+.cart-item{
+    //background-color: green;
+    //margin: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    align-items: center;
+    
+}
+
+.cart-item-image{
+    flex: 0 0 25%;
+    height: 10vh;
+    background-size: cover;
+    margin: 20px;
+    margin-top: 0;
+    background-position: center;
+}

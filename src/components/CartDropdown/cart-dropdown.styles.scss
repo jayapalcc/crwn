@@ -1,0 +1,29 @@
+.cart-dropdown{
+    background-color: rgb(243, 243, 243);
+    position: absolute;
+    //height: 50vh;
+    max-height: 50vh;
+    width: 15vw;
+    z-index: 10000;
+    right: 75px;
+    margin-top: -15px;
+    border: 1px solid rgb(54, 54, 54);
+    box-shadow: 1px 1px 5px rgba(128, 128, 128, 0.616);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cart-btn{
+    margin-top: auto;
+    
+}
+
+.cart-item{
+    width: 100%;
+}
+
+.cart-items{
+    overflow: scroll;
+    width: 90%;
+}

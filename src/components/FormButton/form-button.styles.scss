@@ -1,0 +1,49 @@
+.btn{
+    margin: 10px 0;
+    text-transform: uppercase;
+    padding: 15px 40px;
+    border: none;
+    outline: none;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.black-bg__white-text{
+    color: azure;
+    background-color: rgb(0, 0, 0);
+    &:active{
+        transform: scale(1.02);
+    }
+    &:hover{
+        transform: scale(1.05);
+    }
+}
+
+
+.blue-bg__white-text{
+    color: azure;
+    background-color: rgb(2, 80, 184);
+    &:active{
+        transform: scale(1.02);
+    }
+    &:hover{
+        transform: scale(1.05);
+    }
+}
+
+
+
+.white-bg__black-text{
+    color: rgb(59, 59, 59);
+    background-color: rgba(255, 255, 255, 0.788);
+
+    &:active{
+        transform: scale(1.03);
+    }
+    &:hover{
+        //transform: scale(1.05);
+        color: rgba(255, 255, 255, 0.788);
+        background-color: rgb(59, 59, 59);
+        border: 1px solid white;
+    }
+}
