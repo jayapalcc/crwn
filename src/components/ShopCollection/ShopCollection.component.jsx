@@ -3,9 +3,8 @@ import PreviewCollection from '../PreviewCollection/PreviewCollection.component'
 import {connect} from 'react-redux';
 
 class ShopCollection extends React.Component{
-
     render(){
-       
+        //console.log(this.props);
         const {collections} = this.props;
         return (
             <div>

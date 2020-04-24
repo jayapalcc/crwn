@@ -1,9 +1,9 @@
 // UncontrolledLottie.jsx
 import React, { Component } from 'react'
 import Lottie from 'react-lottie'
-import animationData from './19231-payment-successful.json'
+import animationData from './20016-simple-circular-loader.json'
 
-class UncontrolledLottie extends Component {
+class LoadingLottie extends Component {
 
 
   render(){
@@ -28,4 +28,4 @@ class UncontrolledLottie extends Component {
   }
 }
 
-export default UncontrolledLottie;
+export default LoadingLottie;

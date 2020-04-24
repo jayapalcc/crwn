@@ -43,4 +43,16 @@ provider.setCustomParameters({prompt: 'select_account'});
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
 
+
+/*export const loadFirestore = async(cKey, collections)=>{
+  const cRef = firestore.collection(cKey)
+  const batch = firestore.batch();
+  collections.forEach(cItem=>{
+    const {title,items} = cItem;
+    const dRef = cRef.doc();
+    batch.set(dRef, ({title, items}));
+  });
+  return await batch.commit()
+}*/
+
 export default firebase;

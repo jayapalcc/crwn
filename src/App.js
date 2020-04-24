@@ -30,8 +30,10 @@ class App extends React.Component{
       }else{
         this.props.postCurrentUser(userAuth);
       }
-
     });
+
+    //loadFirestore('collections', this.props.collections);
+
   }
 
   componentWillUnmount(){
@@ -58,6 +60,7 @@ class App extends React.Component{
 function mapStateToProps(state){
   return{
     currentUser: state.user.currentUser
+    //collections: state.shop.collections
   }
 }
 
