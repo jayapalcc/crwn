@@ -2,13 +2,19 @@ import React from 'react';
 import './header.styles.scss';
 import {Link} from 'react-router-dom';
 import {ReactComponent as Logo} from '../../Assets/crown.svg';
-import {auth} from '../../Firebase/Firebase.utils';
+import {signOutInit_A} from '../SignIn/Signin.actions';
 import {connect} from 'react-redux';
 import Cart from '../Cart/Cart.component';
 import CartDropdown from '../CartDropdown/CartDropdown.component';
+import LoadingLottie from '../../Lottie/Lottie.component';
 
 const Header = (props)=>{
     return (<div className="header-main" >
+                {
+                  props.loader
+                  ?<div className="lottie-canvas"><LoadingLottie/></div> 
+                  :null
+                }
               <div className="header">
                   <Link className="logo-box" to="/" ><Logo/></Link>
                   <div className="options">
@@ -16,7 +22,7 @@ const Header = (props)=>{
                       <Link className="option" to="/shop">CONTACT</Link>    
                       {
                           props.currentUser
-                          ?<div className="option" onClick={()=>auth.signOut()}> SIGNOUT</div>
+                          ?<div className="option" onClick={props.signOutClick}> SIGNOUT</div>
                           :<Link className="option" to="/signin">SIGN IN</Link>
                       }
                   </div>
@@ -38,7 +44,8 @@ function mapStateToProps(state){
     return{
       currentUser: state.user.currentUser,
       cart_visibility: state.cart.visible,
-      cart_items: state.cart.items
+      cart_items: state.cart.items,
+      loader: state.user.isInitialising
     }
   }
   
@@ -50,6 +57,9 @@ function mapDispatchToProps(dispatch){
         type: 'CHANGE_STATE'
       }
       dispatch(action);
+    },
+    signOutClick: ()=>{
+      dispatch(signOutInit_A());
     }
   }
 }

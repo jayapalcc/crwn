@@ -3,7 +3,7 @@ import ShopCollection from '../ShopCollection/ShopCollection.component';
 import {Switch, Route} from 'react-router-dom';
 import ShopCollectionDetail from '../ShopCollectionDetail/ShopCollectionDetail.component';
 import {connect} from 'react-redux';
-import { firestore } from '../../Firebase/Firebase.utils';
+import {fetchCollectionStartAction} from './Shop.actions'
 import LoadingLottie from '../../Lottie/Lottie.component';
 
 class Shop extends React.Component{
@@ -11,27 +11,9 @@ class Shop extends React.Component{
     
     
     componentDidMount(){
-        this.props.loaderStart();
-        const cRef = firestore.collection('collections');
-        
-        /*const baseUrl = 'https://firestore.googleapis.com/v1/projects/clothingstore-5ab7e/databases/(default)/documents/collections';
-        fetch(baseUrl).then(response=> response.json()).then(collections=>console.log(collections));*/
-        
-        cRef.get().then(snapshot=>{
-            const orderlyCollection = snapshot.docs.map(doc=>{
-                const {title, items} = doc.data();
-                return {id: doc.id,
-                    title,
-                    routeName: encodeURI(title.toLowerCase()),
-                    items
-               } 
-            });
-            //setTimeout(() => {  console.log("World!"); }, 2000);   
-            this.props.loaderEnd(); 
-            this.props.updateCollectionsFromFirestore(orderlyCollection);        
-             
-        });
-        
+        this.props.fetchCollectionStart();
+            /*const baseUrl = 'https://firestore.googleapis.com/v1/projects/clothingstore-5ab7e/databases/(default)/documents/collections';
+        fetch(baseUrl).then(response=> response.json()).then(collections=>console.log(collections));*/       
     }
     
 
@@ -56,30 +38,14 @@ class Shop extends React.Component{
 
 function mapStateToProps(state){
     return{
-        loaderStatus: state.shop.loader
+        loaderStatus: state.shop.isFetching
     }
 }
 
 function mapDispatchToProps(dispatch){
     return{
-        updateCollectionsFromFirestore: (newCollections)=>{
-            const action ={
-                type: 'UPDATE_COLLECTION',
-                payload: newCollections
-            }
-            dispatch(action);
-        },
-        loaderStart: ()=>{
-            const action ={
-                type: 'LOAD_ANIMATION' 
-            }
-            dispatch(action);
-        },
-        loaderEnd: ()=>{
-            const action ={
-                type: 'END_ANIMATION'
-            }
-            dispatch(action);
+        fetchCollectionStart: ()=>{
+            dispatch(fetchCollectionStartAction())
         }
     }
 }

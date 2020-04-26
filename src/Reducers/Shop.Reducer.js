@@ -2,17 +2,18 @@
 
 const  INITIAL_STATE = {
     collections : [],
-    loader : false
+    isFetching: false,
+    fetchErrorMessage: []
 }
 
 const ShopReducer =(state = INITIAL_STATE, action)=>{
     switch (action.type) {
-        case 'UPDATE_COLLECTION':
-            return {...state, collections: action.payload}
-        case 'LOAD_ANIMATION':
-            return {...state, loader : true}
-        case 'END_ANIMATION':
-            return {...state, loader : false}
+        case 'FETCH_COLLECTION_INIT':
+            return {...state, isFetching: true}
+        case 'FETCH_COLLECTION_SUCCESS':
+            return {...state, collections: action.payload, isFetching: false}
+        case 'FETCH_COLLECTION_FAILED':
+            return {...state, isFetching: false, fetchErrorMessage: action.payload}
         default:
             return state;
     }

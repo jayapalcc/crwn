@@ -38,7 +38,7 @@ firebase.initializeApp(config);
 export const auth = firebase.auth();
 export const firestore = firebase.firestore();
 
-const provider = new firebase.auth.GoogleAuthProvider();
+export const provider = new firebase.auth.GoogleAuthProvider();
 provider.setCustomParameters({prompt: 'select_account'});
 
 export const signInWithGoogle = () => auth.signInWithPopup(provider);
@@ -52,7 +52,17 @@ export const signInWithGoogle = () => auth.signInWithPopup(provider);
     const dRef = cRef.doc();
     batch.set(dRef, ({title, items}));
   });
-  return await batch.commit()
+  return await batch.commit() 
 }*/
+
+//Checking the session of any user
+export const doesUserExist= ()=>{
+  return new Promise ((resolve, reject)=>{
+    const subscribe = auth.onAuthStateChanged(userAuth=>{
+        subscribe();
+        resolve(userAuth);
+    }, reject)
+  });
+}
 
 export default firebase;

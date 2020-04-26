@@ -19,6 +19,8 @@ const CartReducer =(state = INITIAL_STATE, action)=>{
             return CartDecrement(state, action.payload);
         case 'INC_FROM_CART':
             return CartIncrement(state, action.payload);
+        case 'CLEAR_CART':
+            return {...state, items:[]};                                 
         default:
             return state;
     }

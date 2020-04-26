@@ -7,39 +7,15 @@ import CheckoutPage from './CheckoutPage/CheckoutPage.component';
 import Shop from './components/shop/Shop.component'
 import {Switch, Route, Redirect} from 'react-router-dom';
 import Header from './components/Header/Header.component';
-import {auth, createUserProfileDocument} from './Firebase/Firebase.utils';
 import {connect} from 'react-redux';
 import UncontrolledLottie from '../src/Lottie/Lottie.component';
+import {checkSession_A} from './components/SignIn/Signin.actions';
 
 class App extends React.Component{
 
-  unsubscribeAuth = null;
-
   componentDidMount(){
-    this.unsubscribeAuth = auth.onAuthStateChanged(async userAuth =>{
-
-      if(userAuth){
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapshot => {
-          this.props.postCurrentUser({
-            id: snapshot.id,
-            ...snapshot.data()
-          });
-        });
-      }else{
-        this.props.postCurrentUser(userAuth);
-      }
-    });
-
-    //loadFirestore('collections', this.props.collections);
-
+    this.props.checkSession();
   }
-
-  componentWillUnmount(){
-    this.unsubscribeAuth = null;
-  }
-
   render(){
 
     return (
@@ -60,22 +36,15 @@ class App extends React.Component{
 function mapStateToProps(state){
   return{
     currentUser: state.user.currentUser
-    //collections: state.shop.collections
   }
 }
 
 function mapDispatchToProps(dispatch){
   return{
-    postCurrentUser: (user)=>{
-      const action ={
-        type: 'NEW_USER',
-        payload: user
-      }
-      //console.log(action);
-      dispatch(action);
+    checkSession: ()=> {
+      dispatch(checkSession_A());
     }
   }
 }
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

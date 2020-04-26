@@ -1,58 +1,70 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './sign-in.styles.scss';
 import FormInput from '../Form/FormInput.component';
 import FormButton from '../FormButton/FormButton.component';
-import {auth, signInWithGoogle} from '../../Firebase/Firebase.utils'
+import {connect} from 'react-redux';
+import {googleSigninInit_A, emailSigninInit_A} from './Signin.actions';
+import LoadingLottie from '../../Lottie/Lottie.component';
 
-class SignIn extends React.Component{
-    constructor(props){
-        super(props);
+export const SignIn =(props)=>{
+    
+    const[state, setState] = useState({
+                                        email : '',
+                                        password : ''
+                                    });
 
-        this.state={
-            email : '',
-            password : ''
-        }
-    }
+    const {email, password} = state;
 
-    submitHandler =async (e)=>{
+    const submitHandler = (e)=>{
         e.preventDefault();
-        const {email, password} = this.state;
-
-        try{
-            await auth.signInWithEmailAndPassword(email,password);
-            this.setState({email: '', password: ''});
-
-        }catch(error){
-            //alert("Invalid Login Credentials!!!")
-            console.log(error);
-            this.setState({email: '', password: ''});
-        }
+        props.emailSigninInit(email,password);        
     };
 
-    changeHandler = (e)=>{
+    const changeHandler = (e)=>{
         const {value, name} = e.target;
-        this.setState({[name] : value});
-    };
+        setState({...state, [name] : value});
+    }; 
 
-    render(){
-        //console.log(this.state.status);
-        return (
-            <div className="sign-in">
-                <h1>I already have an account</h1>
-                <span>Sign in with your email and password</span>
-                <div className="sign-in-form">
-                    <form >
-                        <FormInput label="Email" handleChange={this.changeHandler} required name="email" type="email" value={this.state.email}/>
-                        <FormInput label="Password" handleChange={this.changeHandler} required name="password" type="password" value={this.state.password}/>
-                        <div className="btn-grp">
-                            <FormButton type="submit" name="Sign In" btn="black-bg__white-text" onClick={this.submitHandler}>Sign In</FormButton>
-                            <FormButton onClick={signInWithGoogle} btn="blue-bg__white-text">Google</FormButton>
-                        </div>
-                    </form>
-                </div>
+    return (
+        <div className="sign-in">
+            {
+                props.loader
+                ? <div className="lottie-canvas"><LoadingLottie/></div>
+                :null
+            }
+            <h1>I already have an account</h1>
+            <span>Sign in with your email and password</span>
+            <div className="sign-in-form">
+                <form >
+                    <FormInput label="Email" handleChange={changeHandler} required name="email" type="email" value={email}/>
+                    <FormInput label="Password" handleChange={changeHandler} required name="password" type="password" value={password}/>
+                    <div className="btn-grp">
+                        <FormButton type="submit" name="Sign In" btn="black-bg__white-text" onClick={submitHandler}>Sign In</FormButton>
+                        <FormButton type="button" onClick={props.googleSigninInit} btn="blue-bg__white-text">Google</FormButton>
+                    </div>
+                </form>
             </div>
-        );
+        </div>
+    );
+}
+
+
+
+function mapStateToProps(state){
+    return{
+        loader: state.user.isInitialising
     }
 }
 
-export default SignIn;
+function mapDispatchToProps(dispatch){
+    return{
+        googleSigninInit: ()=>{
+            dispatch(googleSigninInit_A());
+        },
+        emailSigninInit: (email,password)=>{
+            dispatch(emailSigninInit_A({email, password}));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(SignIn);
